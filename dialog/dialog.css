@@ -1,0 +1,54 @@
+html:has(dialog[open]) {
+    overflow: hidden;
+}
+
+@keyframes slideInDown {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(20%);
+    }
+}
+
+@keyframes slideInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+dialog[open]::backdrop {
+    backdrop-filter: blur(2px);
+    transition: backdrop-filter 0.1s ease;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    dialog {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    dialog.show {
+        animation: slideInUp 0.1s ease-out forwards;
+    }
+
+    dialog.hide {
+        animation: slideInDown 0.1s ease-in forwards;
+    }
+}
+
+.close-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    cursor: pointer;
+}
